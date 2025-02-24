@@ -1,0 +1,77 @@
+bar:
+  height: 14
+  location: top
+  background: 00000000
+  foreground: 99c8e6ff
+  font: "FiraCode Nerd Font:pixelsize=14:weight=medium"
+  spacing: 12
+  border:
+    top-margin: 8
+    left-margin: 24
+    right-margin: 24
+
+  left:
+    - script:
+        path: "/home/kd/.config/yambar/scripts/brightnessnow.sh"
+        poll-interval: 250
+        content:
+          - string: {text: "󰃟  {output}"}
+    - script:
+        path: "/home/kd/.config/yambar/scripts/volnow.sh"
+        poll-interval: 250
+        content:
+          - string: {text: "󱄠 {output}"}
+    - script:
+        path: "/home/kd/.config/yambar/scripts/network.sh"
+        poll-interval: 1000
+        content:
+          - string: {text: "󰖩  {output}"}
+               
+  center:
+    - script:
+        path: /run/current-system/sw/bin/playerctl
+        poll-interval: 1000
+        args:
+           - "--follow"
+           - "metadata"
+           - "-f"
+           - |
+             status|string|{{status}}
+             artist|string|{{artist}}
+             title|string|{{title}}
+        content:
+          map:
+            conditions:
+              status == Paused: 
+                - string: {text: "󰒮 ", on-click: "playerctl previous"}
+                - string: {text: "󰐊 {title}", on-click: "playerctl play-pause"}
+                - string: {text: " 󰒭", on-click: "playerctl next"}
+              status == Playing:
+                - string: {text: "󰒮 ", on-click: "playerctl previous"}
+                - string: {text: "󰏤 {title}", on-click: "playerctl play-pause"}  
+                - string: {text: " 󰒭", on-click: "playerctl next"}
+                
+  right:
+    - battery:
+        name: BAT0
+        poll-interval: 1000
+        content:
+          map:
+            default:
+              string: {text: "  {capacity}%" }
+            conditions:
+              state == "charging":
+                string: {text: "  {capacity}%"}
+
+    - script:
+        path: "/home/kd/.config/yambar/scripts/powernow.sh"
+        poll-interval: 1000
+        content:
+          - string: {text: "  {watts}"}
+                                                        
+    - clock:
+        date-format: "%d %B %Y"
+        time-format: "%H%M"
+        content:
+          - string: {text: "  {date}", right-margin: 12}
+          - string: {text: "  {time}"}

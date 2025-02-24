@@ -1,0 +1,8 @@
+font_family family="FiraCode Nerd Font" style="Retina"
+bold_font family="FiraCode Nerd Font" style="Medium"
+font_size 12.5
+modify_font cell_height 150%
+cursor_shape beam
+background_opacity 0.9
+window_padding_width 6
+confirm_os_window_close 0

@@ -1,0 +1,1 @@
+return { path = "/home/kd/.config/lite-xl", documents = {["type"]="leaf",["active_view"]=1,["views"]={[1]={["filename"]="init.lua",["type"]="doc",["selection"]={[1]=79,[2]=31,[3]=79,[4]=31},["scroll"]={["x"]=0,["y"]=0},["active"]=true,["text"]=false}}}, directories = {} }

@@ -1,0 +1,4 @@
+[manager]
+ratio = [0, 3, 5]
+sort_dir_first = false
+linemode = "size"

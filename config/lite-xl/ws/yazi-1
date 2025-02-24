@@ -1,0 +1,1 @@
+return { path = "/home/kd/.config/yazi", documents = {["active_view"]=1,["views"]={[1]={["filename"]="yazi.toml",["selection"]={[1]=4,[2]=18,[3]=4,[4]=18},["text"]=false,["active"]=true,["scroll"]={["y"]=0,["x"]=0},["type"]="doc"}},["type"]="leaf"}, directories = {} }

@@ -1,0 +1,1 @@
+return { path = "/home/kd/.config/kitty", documents = {["type"]="leaf",["views"]={[1]={["filename"]="kitty.conf",["selection"]={[1]=6,[2]=24,[3]=6,[4]=24},["text"]=false,["type"]="doc",["scroll"]={["y"]=0,["x"]=0},["active"]=true}},["active_view"]=1}, directories = {} }
