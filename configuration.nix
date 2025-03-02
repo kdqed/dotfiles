@@ -15,6 +15,11 @@ in {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.kernelParams = [
+  	"hid_apple.swap_fn_leftctrl=1"
+  	"hid_apple.swap_opt_cmd=1"
+  ];
+
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -30,6 +35,11 @@ in {
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_IN";
+
+  # Dealing with Macbook Shenanigans
+  hardware.facetimehd.enable = true;
+  hardware.opengl.enable = true;
+  
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_IN";
@@ -55,15 +65,17 @@ in {
     isNormalUser = true;
     description = "Karthik";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      (python313.withPackages(ps: with ps; [ virtualenv ]))
-    ];
   };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   
   programs.hyprland.enable = true;
+  programs.firefox = {
+  	enable = true;
+  	package = pkgs.firefox-bin;
+  };
+  programs.nix-ld.enable = true;
 
 
   # List packages installed in system profile. To search, run:
@@ -82,8 +94,9 @@ in {
     hypridle
     playerctl
     brightnessctl
-
-    hyprlock
+	gammastep
+	powertop
+	htop
 
     # basic utils
     kitty
@@ -93,6 +106,8 @@ in {
     # file manager and utils
     yazi
     unzip
+    zip
+    pandoc
     ffmpeg_6-full
     jq
     poppler
@@ -111,6 +126,16 @@ in {
     micro-with-wl-clipboard
     sqlite
     mongosh
+
+    # c/c++ dev
+    #gcc
+    #libgcc
+    #gnumake
+    #cmake
+    #extra-cmake-modules
+
+    # python
+    (python313.withPackages(ps: with ps; [ virtualenv ]))
     
     # for storing github credentials:
     gnupg
@@ -119,15 +144,11 @@ in {
     pinentry-tty
   ];
 
-  services = {
-    upower = {
-      enable = false;
-      percentageLow = 25;
-      percentageCritical = 15;
-      percentageAction = 10;
-      criticalPowerAction = "PowerOff";
-    };
+  #environment.sessionVariables = {
+  #  LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
+  #};
 
+  services = {
     udisks2.enable = true;
     
     mongodb = {
@@ -139,37 +160,55 @@ in {
       lidSwitch = "suspend";	
     };
 
-    #postgresql = {
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      pulse.enable = true;
+    };
+
+    tlp = {
+      enable = false;
+      settings = {
+        CPU_BOOST_ON_AC = 0;
+        CPU_BOOST_ON_BAT = 0;
+        CPU_SCALING_GOVERNOR_ON_AC = "powersave";
+        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      };
+    };
+
+    thermald = {
+      enable = false;
+    };
+
+	upower = {
+      enable = false;
+      percentageLow = 20;
+      percentageCritical = 15;
+      percentageAction = 14;
+      criticalPowerAction = "Hibernate";
+    };
+
+    #xserver = {
     #  enable = true;
-    #  ensureDatabases = [ "ferretdb" ];
-    #  enableTCPIP = true;
-    #  port = 5432;
-    #  authentication = pkgs.lib.mkOverride 10 ''
-        #...
-    #   #type database DBuser origin-address auth-method
-    #    local all       all     trust
-    #    # ipv4
-    #    host  all      all     127.0.0.1/32   trust
-    #    # ipv6
-    #    host all       all     ::1/128        trust
-    #  '';
-    #  initialScript = pkgs.writeText "backend-initScript" ''
-    #    CREATE ROLE nixpostgres WITH LOGIN PASSWORD 'nixpostgres' CREATEDB;
-    #    CREATE DATABASE nixpostgres;
-    #    GRANT ALL PRIVILEGES ON DATABASE nixpostgres TO nixpostgres;
-    #    GRANT ALL PRIVILEGES ON DATABASE ferretdb TO nixpostgres;
-    #  '';
-    #};
-    
-    #ferretdb = {
-    #  enable = true;
-    #  settings = {
-      	#FERRETDB_HANDLER = "sqlite";
-       	#FERRETDB_SQLITE_URL = "file:/var/lib/ferretdb/sqlite_data/";
-    #   	FERRETDB_POSTGRESQL_URL = "postgresql://nixpostgres:nixpostgres@127.0.0.1:5432/ferretdb";
+    #   
+    #  desktopManager = {
+    #    xterm.enable = false;
+    #  };
+    #    
+    #  displayManager = {
+    #    defaultSession = "none+i3";
+    #  };
+    #
+    #  windowManager.i3 = {
+    #    enable = true;
+    #    extraPackages = with pkgs; [
+    #      i3lock
+    #    ];
     #  };
     #};
   };
+
+  powerManagement.powertop.enable = true;
 
   fonts.packages = with pkgs; [
     noto-fonts

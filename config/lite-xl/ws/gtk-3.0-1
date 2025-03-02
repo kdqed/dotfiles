@@ -1,1 +1,1 @@
-return { path = "/home/kd/.config/gtk-3.0", documents = {["type"]="leaf",["active_view"]=1,["views"]={[1]={["selection"]={[1]=2,[2]=36,[3]=2,[4]=36},["active"]=true,["type"]="doc",["scroll"]={["x"]=0,["y"]=0},["text"]=false,["filename"]="settings.ini"}}}, directories = {} }
+return { path = "/home/kd/.config/gtk-3.0", documents = {["views"]={[1]={["filename"]="settings.ini",["active"]=true,["type"]="doc",["scroll"]={["x"]=0,["y"]=0},["selection"]={[1]=2,[2]=36,[3]=2,[4]=36},["text"]=false}},["active_view"]=1,["type"]="leaf"}, directories = {} }

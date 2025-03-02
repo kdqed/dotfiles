@@ -1,14 +1,14 @@
 bar:
-  height: 14
+  height: 30
   location: top
   background: 00000000
   foreground: 99c8e6ff
-  font: "FiraCode Nerd Font:pixelsize=14:weight=medium"
-  spacing: 12
+  font: "FiraCode Nerd Font:pixelsize=28:weight=medium"
+  spacing: 24
   border:
-    top-margin: 8
-    left-margin: 24
-    right-margin: 24
+    top-margin: 16
+    left-margin: 48
+    right-margin: 48
 
   left:
     - script:

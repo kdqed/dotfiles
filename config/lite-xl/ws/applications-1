@@ -1,0 +1,1 @@
+return { path = "/home/kd/.local/share/applications", documents = {["views"]={[1]={["selection"]={[1]=19,[2]=64,[3]=19,[4]=64},["scroll"]={["x"]=494.96875,["y"]=464.0},["text"]=false,["filename"]="w-chrome.desktop",["type"]="doc",["active"]=false}},["type"]="leaf",["active_view"]=1}, directories = {} }

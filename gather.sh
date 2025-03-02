@@ -2,7 +2,7 @@ cp /etc/nixos/configuration.nix configuration.nix
 cp $HOME/.bashrc bashrc
 
 rm -rf icons
-cp -r $HOME/.local/share/icons icons
+cp -r $HOME/.icons icons
 
 rm -rf config
 mkdir config
